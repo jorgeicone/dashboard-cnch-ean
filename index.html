@@ -42,7 +42,7 @@
   .tab.active .num{background:var(--ean);color:#fff}
   .tab .lbl{display:inline}
 
-  .nav-arrows{position:fixed;bottom:24px;right:24px;display:flex;gap:8px;z-index:80}
+  .nav-arrows{position:fixed;bottom:24px;left:24px;display:flex;gap:8px;z-index:80}
   .nav-arrows button{width:50px;height:50px;border-radius:50%;border:none;background:var(--navy);color:#fff;cursor:pointer;font-size:20px;box-shadow:0 4px 14px rgba(0,0,0,.18);transition:all .15s;font-weight:700}
   .nav-arrows button:hover{background:var(--ean);transform:translateY(-2px)}
   .nav-arrows button:disabled{opacity:.35;cursor:not-allowed;transform:none}
@@ -114,8 +114,10 @@
   .artifact .label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey);font-weight:800;margin-bottom:8px}
   .artifact h3{margin:0 0 8px;font-size:17px}
   .artifact p{font-size:13px;color:var(--grey);margin:0 0 14px;flex:1;line-height:1.55}
-  .artifact .cta{display:inline-flex;align-items:center;gap:8px;background:var(--ean);color:#fff;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:.02em;align-self:flex-start}
-  .artifact .cta:hover{background:var(--ean-2);text-decoration:none}
+  .artifact .cta{display:inline-flex;align-items:center;gap:8px;background:var(--ean);color:#fff;padding:12px 20px;border-radius:8px;font-size:14px;font-weight:700;letter-spacing:.02em;align-self:flex-start;cursor:pointer;position:relative;z-index:1}
+  .artifact .cta:hover{background:var(--ean-2);text-decoration:none;transform:translateY(-1px)}
+  .artifact{position:relative}
+  .artifact .full-link{position:absolute;inset:0;z-index:2;text-indent:-9999px}
 
   /* ============ DOTS DIAGRAM ============ */
   .ejes-instrumento{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:22px 0}
@@ -321,33 +323,33 @@
 
     <h3 style="margin:34px 0 14px;font-size:18px">Artefactos demostrables — clic para abrir en vivo</h3>
     <div class="grid-3">
-      <div class="artifact">
+      <a class="artifact" href="https://proyectos.iconeialabs.com/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
         <div class="thumb"><span>PROYECTOS</span></div>
         <div class="body">
           <div class="label">Plataforma viva  ·  Demo abierta</div>
           <h3>Portafolio de proyectos en territorio</h3>
           <p>Repositorio con los proyectos aplicados, casos de uso y entregables generados con organizaciones reales en distintos sectores.</p>
-          <a class="cta" href="https://proyectos.iconeialabs.com/" target="_blank" rel="noopener">Abrir portafolio en vivo →</a>
+          <span class="cta">Abrir portafolio en vivo →</span>
         </div>
-      </div>
-      <div class="artifact">
+      </a>
+      <a class="artifact" href="https://diagnostico.iconeialabs.com/" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
         <div class="thumb"><span>DIAGNÓSTICO</span></div>
         <div class="body">
           <div class="label">Herramienta operativa  ·  Demo abierta</div>
           <h3>Diagnóstico de madurez digital aplicado</h3>
           <p>Herramienta de diagnóstico que ya hemos usado con organizaciones para detectar brechas y generar planes de acción priorizados.</p>
-          <a class="cta" href="https://diagnostico.iconeialabs.com/" target="_blank" rel="noopener">Abrir diagnóstico en vivo →</a>
+          <span class="cta">Abrir diagnóstico en vivo →</span>
         </div>
-      </div>
-      <div class="artifact">
+      </a>
+      <a class="artifact" href="simulador.html" target="_blank" rel="noopener" style="text-decoration:none;color:inherit">
         <div class="thumb"><span>SIMULADOR</span></div>
         <div class="body">
           <div class="label">Construido para CNCH  ·  Demo en sala</div>
           <h3>Simulador de Madurez Asociativa CNCH</h3>
           <p>Capa analítica diseñada sobre el instrumento de CNCH: captura los 10 ítems, calcula score, nivel de madurez, radar y plan de acción en vivo.</p>
-          <a class="cta" href="simulador.html" target="_blank" rel="noopener">Abrir simulador →</a>
+          <span class="cta">Abrir simulador →</span>
         </div>
-      </div>
+      </a>
     </div>
 
     <h3 style="margin:34px 0 14px;font-size:18px">Por qué esto le sirve a CNCH</h3>
@@ -513,11 +515,4 @@
   next.addEventListener("click", ()=>show(active+1));
   document.addEventListener("keydown", e=>{
     if (e.key==="ArrowRight") show(active+1);
-    if (e.key==="ArrowLeft") show(active-1);
-    if (e.key>="1" && e.key<="5") show(parseInt(e.key,10)-1);
-  });
-  document.getElementById("today").textContent = new Date().toLocaleDateString("es-CO",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
-  show(0);
-</script>
-</body>
-</html>
+    if 
