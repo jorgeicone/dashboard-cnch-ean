@@ -1,0 +1,523 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Universidad EAN — Impacta Rural y Diverso · Propuesta para CNCH</title>
+<style>
+  :root{
+    --navy:#10221A;
+    --ean:#0F6E3D;
+    --ean-2:#13864A;
+    --ean-soft:#E7F3EC;
+    --gold:#C49A2C;
+    --chocolate:#4E2A14;
+    --grey:#5A6573;
+    --light:#F4F6F8;
+    --line:#D8DEE6;
+    --accent:#EFF8F3;
+  }
+  *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  html,body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Calibri,Roboto,Helvetica,Arial,sans-serif;background:#EEF1F4;color:var(--navy);line-height:1.55}
+  .container{max-width:1280px;margin:0 auto;padding:0 32px}
+  a{color:var(--ean);text-decoration:none;font-weight:600}
+  a:hover{text-decoration:underline}
+
+  /* ============ HEADER ============ */
+  header.band{background:linear-gradient(135deg,var(--navy) 0%,#1B3527 100%);color:#fff;padding:18px 0}
+  header .row{display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+  header .brand .eyebrow{font-size:11px;letter-spacing:.22em;color:#9FC8B3;font-weight:700;margin-bottom:4px}
+  header .brand .title{font-size:20px;font-weight:800;letter-spacing:.01em}
+  header .brand .subtitle{font-size:12px;color:#C7E0D2;margin-top:3px;font-style:italic}
+  header .meta{font-size:11px;color:#9FC8B3;text-align:right;line-height:1.6}
+  header .meta strong{color:#fff}
+
+  /* ============ TABS ============ */
+  nav.tabs{background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:50;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+  nav.tabs .row{display:flex;gap:0;align-items:stretch;flex-wrap:wrap}
+  .tab{flex:1;min-width:140px;background:transparent;border:none;cursor:pointer;font-family:inherit;font-weight:600;font-size:13px;padding:18px 14px;color:var(--grey);border-bottom:3px solid transparent;transition:all .15s;letter-spacing:.02em;display:flex;align-items:center;justify-content:center;gap:10px;text-align:left}
+  .tab:hover{color:var(--navy);background:var(--light)}
+  .tab.active{color:var(--ean);border-bottom-color:var(--ean);background:var(--ean-soft)}
+  .tab .num{display:inline-flex;width:24px;height:24px;border-radius:50%;background:var(--line);color:var(--navy);font-size:11px;font-weight:800;align-items:center;justify-content:center;flex-shrink:0}
+  .tab.active .num{background:var(--ean);color:#fff}
+  .tab .lbl{display:inline}
+
+  .nav-arrows{position:fixed;bottom:24px;right:24px;display:flex;gap:8px;z-index:80}
+  .nav-arrows button{width:50px;height:50px;border-radius:50%;border:none;background:var(--navy);color:#fff;cursor:pointer;font-size:20px;box-shadow:0 4px 14px rgba(0,0,0,.18);transition:all .15s;font-weight:700}
+  .nav-arrows button:hover{background:var(--ean);transform:translateY(-2px)}
+  .nav-arrows button:disabled{opacity:.35;cursor:not-allowed;transform:none}
+
+  /* ============ PAGES ============ */
+  .pages{padding:36px 0 80px}
+  .page{display:none}
+  .page.active{display:block;animation:fadeUp .35s ease}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+  .page-eyebrow{font-size:11px;letter-spacing:.22em;color:var(--ean);font-weight:800;text-transform:uppercase;margin-bottom:8px}
+  .page h1{font-size:34px;margin:0 0 12px;letter-spacing:-.015em;line-height:1.15}
+  .page .lead{font-size:16px;color:var(--grey);max-width:900px;margin-bottom:28px;line-height:1.6}
+
+  /* ============ CARDS / GRIDS ============ */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+  .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:22px;transition:all .2s}
+  .card .head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+  .card .icon{width:38px;height:38px;border-radius:10px;background:var(--ean-soft);color:var(--ean);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;flex-shrink:0}
+  .card.dark{background:linear-gradient(135deg,var(--navy) 0%,#1B3527 100%);color:#fff;border:none}
+  .card.dark .icon{background:rgba(255,255,255,.12);color:#9FC8B3}
+  .card.dark h3{color:#fff}
+  .card.dark p{color:#C7E0D2}
+  .card.gold{background:#FAF1DA;border-color:#E5C988}
+  .card.gold .icon{background:#fff;color:var(--gold)}
+  .card h3{margin:0;font-size:16px;font-weight:800}
+  .card p{font-size:14px;color:var(--grey);margin:0 0 8px}
+  .card ul{margin:0;padding-left:18px;font-size:14px;color:var(--navy);line-height:1.65}
+  .card ul li{margin-bottom:6px}
+  .kpi{font-size:36px;font-weight:800;line-height:1;color:var(--ean);margin:6px 0 4px}
+  .kpi-sub{font-size:12px;text-transform:uppercase;letter-spacing:.14em;color:var(--grey);font-weight:700}
+
+  /* ============ PILL / TAGS ============ */
+  .pill{display:inline-block;padding:4px 12px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:var(--ean-soft);color:var(--ean)}
+  .pill.choco{background:#F5E8E0;color:var(--chocolate)}
+  .pill.gold{background:#FAF1DA;color:#7C5F12}
+  .pill.dark{background:var(--navy);color:#fff}
+
+  /* ============ TABLES ============ */
+  .nice-table{width:100%;border-collapse:collapse;font-size:14px;background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .nice-table th{text-align:left;padding:14px 18px;background:var(--navy);color:#fff;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:800}
+  .nice-table td{padding:14px 18px;border-bottom:1px solid var(--line);vertical-align:top}
+  .nice-table tr:last-child td{border-bottom:none}
+  .nice-table tr:hover td{background:var(--accent)}
+
+  /* ============ TIMELINE / ROADMAP ============ */
+  .timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:24px 0;position:relative}
+  .timeline::before{content:"";position:absolute;top:34px;left:8%;right:8%;height:3px;background:linear-gradient(to right,var(--ean) 0%,var(--gold) 100%);z-index:0}
+  .tl-step{position:relative;padding:0 12px;z-index:1;text-align:center}
+  .tl-step .dot{width:64px;height:64px;border-radius:50%;background:#fff;border:3px solid var(--ean);color:var(--ean);font-weight:800;font-size:22px;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;box-shadow:0 0 0 6px rgba(255,255,255,.8)}
+  .tl-step:nth-child(2) .dot{border-color:#3FA869;color:#3FA869}
+  .tl-step:nth-child(3) .dot{border-color:var(--gold);color:var(--gold)}
+  .tl-step:nth-child(4) .dot{border-color:var(--chocolate);color:var(--chocolate)}
+  .tl-step .when{font-size:11px;letter-spacing:.12em;font-weight:800;text-transform:uppercase;color:var(--grey);margin-bottom:4px}
+  .tl-step .what{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:6px}
+  .tl-step .how{font-size:12px;color:var(--grey);line-height:1.5}
+
+  /* ============ ARTIFACTS ============ */
+  .artifact{background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;transition:all .2s;display:flex;flex-direction:column}
+  .artifact:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,0,0,.06);border-color:var(--ean)}
+  .artifact .thumb{height:170px;background:linear-gradient(135deg,var(--ean) 0%,#3FA869 100%);position:relative;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:34px;letter-spacing:.04em;overflow:hidden}
+  .artifact:nth-child(2) .thumb{background:linear-gradient(135deg,var(--navy) 0%,#1B3527 100%)}
+  .artifact:nth-child(3) .thumb{background:linear-gradient(135deg,var(--chocolate) 0%,#8E4F2D 100%)}
+  .artifact .thumb::after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,rgba(255,255,255,.18),transparent 60%)}
+  .artifact .thumb span{position:relative;z-index:1}
+  .artifact .body{padding:20px;flex:1;display:flex;flex-direction:column}
+  .artifact .label{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--grey);font-weight:800;margin-bottom:8px}
+  .artifact h3{margin:0 0 8px;font-size:17px}
+  .artifact p{font-size:13px;color:var(--grey);margin:0 0 14px;flex:1;line-height:1.55}
+  .artifact .cta{display:inline-flex;align-items:center;gap:8px;background:var(--ean);color:#fff;padding:10px 16px;border-radius:8px;font-size:13px;font-weight:700;letter-spacing:.02em;align-self:flex-start}
+  .artifact .cta:hover{background:var(--ean-2);text-decoration:none}
+
+  /* ============ DOTS DIAGRAM ============ */
+  .ejes-instrumento{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:22px 0}
+  .eje-block{background:#fff;border-radius:14px;border:1px solid var(--line);overflow:hidden}
+  .eje-block .eje-head{padding:18px 22px;color:#fff;font-weight:800;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+  .eje-block.td .eje-head{background:linear-gradient(135deg,var(--navy) 0%,#1B3527 100%)}
+  .eje-block.ef .eje-head{background:linear-gradient(135deg,var(--ean) 0%,#3FA869 100%)}
+  .eje-block ol{margin:0;padding:18px 22px 18px 36px;font-size:13.5px;color:var(--navy);line-height:1.65}
+  .eje-block ol li{margin-bottom:8px}
+
+  /* ============ HERO BIG NUMBERS ============ */
+  .impact-row{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin:20px 0 8px}
+  .impact{background:#fff;border:1px solid var(--line);border-radius:14px;padding:24px 20px;text-align:center}
+  .impact .big{font-size:46px;font-weight:800;color:var(--ean);line-height:.95;letter-spacing:-.02em}
+  .impact .lbl{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--grey);font-weight:700;margin-top:8px}
+
+  /* ============ NEXT STEPS ============ */
+  .step-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .step{background:#fff;border-left:5px solid var(--ean);border-radius:0 14px 14px 0;padding:22px 24px;border:1px solid var(--line);border-left:5px solid var(--ean)}
+  .step .when{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ean);font-weight:800;margin-bottom:6px}
+  .step h4{margin:0 0 6px;font-size:16px}
+  .step p{font-size:13.5px;color:var(--grey);margin:0;line-height:1.6}
+
+  /* ============ FOOTER ============ */
+  footer{margin-top:60px;padding:36px 0;background:linear-gradient(135deg,var(--navy) 0%,#1B3527 100%);color:#fff;text-align:center;font-size:12px;line-height:1.7}
+  footer strong{color:#9FC8B3}
+  footer .seal{font-size:15px;font-weight:800;letter-spacing:.04em;margin-bottom:6px}
+
+  /* ============ KBD ============ */
+  .kbd{display:inline-block;padding:2px 7px;border-radius:5px;background:rgba(255,255,255,.12);color:#9FC8B3;font-family:ui-monospace,Menlo,Consolas,monospace;font-size:11px;font-weight:700;border:1px solid rgba(255,255,255,.18)}
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width:1100px){
+    .grid-3,.grid-4,.impact-row,.timeline{grid-template-columns:repeat(2,1fr)}
+    .timeline::before{display:none}
+    .step-grid{grid-template-columns:1fr}
+    .ejes-instrumento{grid-template-columns:1fr}
+  }
+  @media (max-width:680px){
+    .grid-2,.grid-3,.grid-4,.impact-row{grid-template-columns:1fr}
+    .tab .lbl{display:none}
+    .page h1{font-size:26px}
+  }
+</style>
+</head>
+<body>
+
+<header class="band">
+  <div class="container row">
+    <div class="brand">
+      <div class="eyebrow">UNIVERSIDAD EAN  ·  IMPACTA RURAL Y DIVERSO</div>
+      <div class="title">Fortalecimiento de Asociaciones Cacaoteras</div>
+      <div class="subtitle">Propuesta de acompañamiento para Compañía Nacional de Chocolates</div>
+    </div>
+    <div class="meta">
+      <strong>Sesión de validación</strong><br>
+      <span id="today"></span><br>
+      Navegación: <span class="kbd">←</span> <span class="kbd">→</span>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs">
+  <div class="container row" id="tabs">
+    <button class="tab active" data-page="0"><span class="num">1</span><span class="lbl">Resumen</span></button>
+    <button class="tab" data-page="1"><span class="num">2</span><span class="lbl">Lectura del Instrumento</span></button>
+    <button class="tab" data-page="2"><span class="num">3</span><span class="lbl">Evidencia y Artefactos</span></button>
+    <button class="tab" data-page="3"><span class="num">4</span><span class="lbl">Hoja de Ruta</span></button>
+    <button class="tab" data-page="4"><span class="num">5</span><span class="lbl">Próximos Pasos</span></button>
+  </div>
+</nav>
+
+<main class="container pages">
+
+  <!-- ========================= PAGE 1 — RESUMEN ========================= -->
+  <section class="page active" data-page="0">
+    <div class="page-eyebrow">Vista 1 · Resumen ejecutivo</div>
+    <h1>Una alianza académica para fortalecer las asociaciones de productores que abastecen a CNCH</h1>
+    <p class="lead">La Universidad EAN, a través del programa <strong>Impacta Rural y Diverso</strong>, pone su capacidad académica, su metodología validada en territorio y su red de estudiantes y docentes al servicio del fortalecimiento de las asociaciones cacaoteras de la Compañía Nacional de Chocolates.</p>
+
+    <div class="impact-row">
+      <div class="impact"><div class="big">25+</div><div class="lbl">Años acompañando emprendimientos en LATAM</div></div>
+      <div class="impact"><div class="big">500+</div><div class="lbl">Organizaciones acompañadas en territorio</div></div>
+      <div class="impact"><div class="big">3K+</div><div class="lbl">Estudiantes formados en metodología EAN</div></div>
+      <div class="impact"><div class="big">+15</div><div class="lbl">Sectores con experiencia comprobada</div></div>
+    </div>
+
+    <div class="grid-3" style="margin-top:24px">
+      <div class="card">
+        <div class="head"><div class="icon">①</div><h3>El reto que vemos</h3></div>
+        <p>CNCH ya tiene un instrumento sólido para medir madurez asociativa en Transformación Digital y Educación Financiera. La conversación útil ya no es <em>qué medir</em> — es <em>cómo cerrar la brecha</em> cuando los datos estén sobre la mesa.</p>
+      </div>
+      <div class="card">
+        <div class="head"><div class="icon">②</div><h3>Lo que aporta la EAN</h3></div>
+        <p>Metodología <strong>Impacta Rural y Diverso Tech</strong>, validada en territorio. Certificación académica institucional, rigor pedagógico y un ecosistema de estudiantes y docentes que ya hacen co-creación con organizaciones rurales reales.</p>
+      </div>
+      <div class="card dark">
+        <div class="head"><div class="icon">③</div><h3>Lo que ofrecemos a CNCH</h3></div>
+        <p>Un programa de fortalecimiento ejecutable sobre las brechas que su propio instrumento revela. Diplomado a Juntas Directivas, mentoría a gerentes, herramientas digitales mínimas viables y trazabilidad lista para regulación.</p>
+      </div>
+    </div>
+
+    <div class="card gold" style="margin-top:24px">
+      <div class="head"><div class="icon">★</div><h3>El mensaje central de hoy</h3></div>
+      <p style="color:var(--navy);font-size:15px"><strong>"Ustedes ya saben qué medir. Nosotros sabemos cómo cerrar la brecha — con método, con estudiantes en territorio y con artefactos que ya funcionan."</strong></p>
+    </div>
+  </section>
+
+  <!-- ========================= PAGE 2 — INSTRUMENTO ========================= -->
+  <section class="page" data-page="1">
+    <div class="page-eyebrow">Vista 2 · Lectura del instrumento CNCH</div>
+    <h1>Lo que dice — y lo que no dice — el instrumento que aplican hoy</h1>
+    <p class="lead">El instrumento CNCH evalúa 10 ítems en escala 0-2, agrupados en dos ejes. Es un buen instrumento, pero está diseñado para detectar brechas — no para resolverlas. Aquí leemos qué mide y qué espacio deja para una alianza académica.</p>
+
+    <div class="ejes-instrumento">
+      <div class="eje-block td">
+        <div class="eje-head">Eje 1 · Transformación Digital  ·  5 ítems · 10 pts máx.</div>
+        <ol>
+          <li>Historial digitalizado de comercialización</li>
+          <li>Equipos de cómputo en operación</li>
+          <li>Acceso a internet en el punto de compra</li>
+          <li>Soluciones tecnológicas implementadas (apps, software contable, inventarios)</li>
+          <li>Capacitación tecnológica de la Junta Directiva</li>
+        </ol>
+      </div>
+      <div class="eje-block ef">
+        <div class="eje-head">Eje 2 · Educación Financiera  ·  5 ítems · 10 pts máx.</div>
+        <ol>
+          <li>Ingresos vs. gastos (sostenibilidad financiera)</li>
+          <li>Programas de ahorro entre productores</li>
+          <li>Cálculo del costo de comercialización por kg de cacao</li>
+          <li>Registros en finca (costos producción / ingresos)</li>
+          <li>Comprobantes / facturación a los agricultores</li>
+        </ol>
+      </div>
+    </div>
+
+    <h3 style="margin:30px 0 14px;font-size:18px">Lo que el instrumento revela sobre la mirada estratégica de CNCH</h3>
+    <div class="grid-3">
+      <div class="card">
+        <div class="head"><div class="icon">✦</div><h3>Foco en la Junta</h3></div>
+        <p>El instrumento mide capacidad <strong>organizacional</strong>, no calidad de cacao. CNCH asume la producción; la pregunta es la asociación como empresa.</p>
+      </div>
+      <div class="card">
+        <div class="head"><div class="icon">✦</div><h3>Trazabilidad latente</h3></div>
+        <p>Ítems sobre registros, costos y comprobantes anticipan demandas de <strong>certificación</strong> y de la Ley antideforestación de la UE.</p>
+      </div>
+      <div class="card">
+        <div class="head"><div class="icon">✦</div><h3>Brecha estructural</h3></div>
+        <p>La mayoría de asociaciones rurales sacarán <strong>0 o 1</strong> en varios ítems. Es un instrumento que detecta huecos — no que certifica madurez.</p>
+      </div>
+    </div>
+
+    <h3 style="margin:30px 0 14px;font-size:18px">Cómo la metodología <em>Impacta Rural y Diverso Tech</em> se mapea sobre el instrumento</h3>
+    <table class="nice-table">
+      <thead><tr><th style="width:30%">Eje del instrumento CNCH</th><th>Qué activa la EAN — Impacta Rural y Diverso</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Transformación Digital</strong><br><span style="color:var(--grey);font-size:12px">Historial · equipos · internet · software · capacitación de Junta</span></td>
+          <td>
+            • <strong>Diplomado certificado EAN "Junta Directiva Digital"</strong> para presidentes, gerentes y tesoreros (8–12 semanas, modalidad híbrida).<br>
+            • <strong>Caja de herramientas digitales mínimas viables</strong> diseñada con estudiantes para operación rural real.<br>
+            • <strong>Acompañamiento territorial</strong> para asegurar adopción, no sólo entrega.
+          </td>
+        </tr>
+        <tr>
+          <td><strong>Educación Financiera</strong><br><span style="color:var(--grey);font-size:12px">Ingresos vs gastos · ahorro · costo por kg · registros en finca · comprobantes</span></td>
+          <td>
+            • <strong>Mentoría a gerentes</strong> de las asociaciones priorizadas.<br>
+            • <strong>Programa de Costos y Ahorro Asociativo</strong> con cálculo real del costo de comercialización por kg de cacao.<br>
+            • <strong>Cultura de comprobantes y registros</strong> como puente hacia trazabilidad y formalización (Rainforest, EUDR).
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- ========================= PAGE 3 — EVIDENCIA / ARTEFACTOS ========================= -->
+  <section class="page" data-page="2">
+    <div class="page-eyebrow">Vista 3 · Evidencia y artefactos</div>
+    <h1>No traemos teoría — traemos cosas que ya funcionan</h1>
+    <p class="lead">Lo que mostramos hoy son artefactos reales, en uso, construidos por estudiantes y docentes de la EAN con organizaciones en territorio. La idea de "demo" no es una promesa — es una invitación a abrir el link y verlo en vivo.</p>
+
+    <h3 style="margin:0 0 14px;font-size:18px">Modalidades de trabajo con estudiantes que ya operan</h3>
+    <div class="grid-4">
+      <div class="card">
+        <div class="head"><div class="icon">A</div><h3 style="font-size:14px">Proyectos de aula aplicados</h3></div>
+        <p style="font-size:13px">Estudiantes EAN trabajando con asociaciones rurales reales en diagnósticos, planes de mejora y MVPs digitales.</p>
+      </div>
+      <div class="card">
+        <div class="head"><div class="icon">B</div><h3 style="font-size:14px">Tesis y proyectos de grado</h3></div>
+        <p style="font-size:13px">Investigaciones aplicadas en cadena de cacao y otras cadenas agro, con entregables que la organización conserva.</p>
+      </div>
+      <div class="card">
+        <div class="head"><div class="icon">C</div><h3 style="font-size:14px">Pasantías y co-creación</h3></div>
+        <p style="font-size:13px">Estudiantes en territorio haciendo trabajo de campo, observación y construcción conjunta con cooperativas y asociaciones.</p>
+      </div>
+      <div class="card">
+        <div class="head"><div class="icon">D</div><h3 style="font-size:14px">Talleres a Juntas Directivas</h3></div>
+        <p style="font-size:13px">Diplomados y módulos cortos dictados a juntas directivas, con material reutilizable y curva de aprendizaje validada.</p>
+      </div>
+    </div>
+
+    <h3 style="margin:34px 0 14px;font-size:18px">Artefactos demostrables — clic para abrir en vivo</h3>
+    <div class="grid-3">
+      <div class="artifact">
+        <div class="thumb"><span>PROYECTOS</span></div>
+        <div class="body">
+          <div class="label">Plataforma viva  ·  Demo abierta</div>
+          <h3>Portafolio de proyectos en territorio</h3>
+          <p>Repositorio con los proyectos aplicados, casos de uso y entregables generados con organizaciones reales en distintos sectores.</p>
+          <a class="cta" href="https://proyectos.iconeialabs.com/" target="_blank" rel="noopener">Abrir portafolio en vivo →</a>
+        </div>
+      </div>
+      <div class="artifact">
+        <div class="thumb"><span>DIAGNÓSTICO</span></div>
+        <div class="body">
+          <div class="label">Herramienta operativa  ·  Demo abierta</div>
+          <h3>Diagnóstico de madurez digital aplicado</h3>
+          <p>Herramienta de diagnóstico que ya hemos usado con organizaciones para detectar brechas y generar planes de acción priorizados.</p>
+          <a class="cta" href="https://diagnostico.iconeialabs.com/" target="_blank" rel="noopener">Abrir diagnóstico en vivo →</a>
+        </div>
+      </div>
+      <div class="artifact">
+        <div class="thumb"><span>SIMULADOR</span></div>
+        <div class="body">
+          <div class="label">Construido para CNCH  ·  Demo en sala</div>
+          <h3>Simulador de Madurez Asociativa CNCH</h3>
+          <p>Capa analítica diseñada sobre el instrumento de CNCH: captura los 10 ítems, calcula score, nivel de madurez, radar y plan de acción en vivo.</p>
+          <a class="cta" href="simulador.html" target="_blank" rel="noopener">Abrir simulador →</a>
+        </div>
+      </div>
+    </div>
+
+    <h3 style="margin:34px 0 14px;font-size:18px">Por qué esto le sirve a CNCH</h3>
+    <div class="grid-2">
+      <div class="card">
+        <div class="head"><div class="icon">→</div><h3>Riesgo bajo, evidencia tangible</h3></div>
+        <p style="font-size:14px;color:var(--navy)">No están comprando un PowerPoint. Están viendo artefactos que ya operan, hechos por una universidad con responsabilidad institucional.</p>
+      </div>
+      <div class="card">
+        <div class="head"><div class="icon">→</div><h3>Escalable a toda la red</h3></div>
+        <p style="font-size:14px;color:var(--navy)">Lo que funciona con una asociación se replica. La EAN tiene capacidad para escalar el modelo a las decenas de asociaciones de la red CNCH.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= PAGE 4 — HOJA DE RUTA ========================= -->
+  <section class="page" data-page="3">
+    <div class="page-eyebrow">Vista 4 · Hoja de ruta propuesta</div>
+    <h1>Cómo se ve trabajar juntos — los 4 momentos clave</h1>
+    <p class="lead">Una hoja de ruta de aproximadamente 6 meses, con un piloto acotado en 3 asociaciones, medición sobre el Dashboard propio de CNCH y un cierre con resultados verificables.</p>
+
+    <div class="timeline">
+      <div class="tl-step">
+        <div class="dot">0</div>
+        <div class="when">Semana 0–2</div>
+        <div class="what">Co-diseño del piloto</div>
+        <div class="how">Selección de las 3 asociaciones piloto, acceso al Dashboard CNCH, línea base con resultados del diagnóstico actual.</div>
+      </div>
+      <div class="tl-step">
+        <div class="dot">1</div>
+        <div class="when">Mes 1–2</div>
+        <div class="what">Activación territorial</div>
+        <div class="how">Arranque del Diplomado a Junta Directiva, despliegue de la caja de herramientas y primer corte de mentoría a gerentes.</div>
+      </div>
+      <div class="tl-step">
+        <div class="dot">2</div>
+        <div class="when">Mes 3–5</div>
+        <div class="what">Implementación + medición</div>
+        <div class="how">Adopción real de comprobantes, costos y ahorro. Medición trimestral sobre los 10 ítems del instrumento CNCH.</div>
+      </div>
+      <div class="tl-step">
+        <div class="dot">3</div>
+        <div class="when">Mes 6</div>
+        <div class="what">Cierre + escalamiento</div>
+        <div class="how">Reporte ejecutivo con avance medido, plan de extensión al resto de la red CNCH y propuesta de fase 2.</div>
+      </div>
+    </div>
+
+    <h3 style="margin:34px 0 14px;font-size:18px">Entregables concretos por mes</h3>
+    <table class="nice-table">
+      <thead><tr><th style="width:18%">Momento</th><th>Entregable principal</th><th style="width:28%">Indicador medible</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill">Mes 1</span></td><td>Línea base por asociación + plan individual de intervención</td><td>3 planes firmados con las Juntas Directivas</td></tr>
+        <tr><td><span class="pill">Mes 2</span></td><td>Diplomado en marcha + caja de herramientas digitales entregada</td><td>≥ 80% de asistencia de la Junta a sesiones del diplomado</td></tr>
+        <tr><td><span class="pill">Mes 3</span></td><td>Primer corte trimestral sobre el Dashboard CNCH</td><td>Movimiento positivo en ≥ 4 de los 10 ítems</td></tr>
+        <tr><td><span class="pill">Mes 4–5</span></td><td>Programa de ahorro asociativo + cultura de comprobantes</td><td>≥ 70% de productores con comprobante por entrega</td></tr>
+        <tr><td><span class="pill choco">Mes 6</span></td><td>Reporte ejecutivo final + propuesta de escalamiento</td><td>Score promedio por asociación ≥ +5 pts sobre línea base</td></tr>
+      </tbody>
+    </table>
+
+    <h3 style="margin:34px 0 14px;font-size:18px">Lo que necesitamos de CNCH para que esto funcione</h3>
+    <div class="grid-3">
+      <div class="card">
+        <div class="head"><div class="icon">1</div><h3>Acceso al Dashboard</h3></div>
+        <p>Resultados del diagnóstico actual para construir la línea base sin duplicar esfuerzos.</p>
+      </div>
+      <div class="card">
+        <div class="head"><div class="icon">2</div><h3>3 asociaciones priorizadas</h3></div>
+        <p>Con diversidad geográfica y de tamaño para validar replicabilidad.</p>
+      </div>
+      <div class="card">
+        <div class="head"><div class="icon">3</div><h3>Interlocutor único en CNCH</h3></div>
+        <p>Una persona responsable del piloto del lado de CNCH (sostenibilidad, compras o asuntos corporativos).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================= PAGE 5 — PRÓXIMOS PASOS ========================= -->
+  <section class="page" data-page="4">
+    <div class="page-eyebrow">Vista 5 · Próximos pasos</div>
+    <h1>De esta conversación a una decisión</h1>
+    <p class="lead">El piloto está diseñado para empezar en máximo dos semanas. Estos son los pasos concretos que proponemos para cerrar el alcance, definir presupuesto y arrancar.</p>
+
+    <div class="step-grid">
+      <div class="step">
+        <div class="when">Hoy · al cierre de esta reunión</div>
+        <h4>1. Validar alcance y resonancia</h4>
+        <p>Confirmar con CNCH que el modelo Junta Directiva Digital + Educación Financiera + capa analítica responde al reto que ven internamente.</p>
+      </div>
+      <div class="step">
+        <div class="when">Esta semana</div>
+        <h4>2. Compartir resultados parciales del diagnóstico</h4>
+        <p>Aún sin estar consolidado, recibir muestra de resultados nos permite calibrar la propuesta a la realidad de la red.</p>
+      </div>
+      <div class="step">
+        <div class="when">Semana siguiente</div>
+        <h4>3. Definir 3 asociaciones piloto</h4>
+        <p>Con criterios de geografía, tamaño y disposición al cambio. Reunión técnica con los líderes territoriales de CNCH.</p>
+      </div>
+      <div class="step">
+        <div class="when">2 semanas</div>
+        <h4>4. Firmar carta de intención y arrancar Semana 0</h4>
+        <p>Marco de cooperación EAN — CNCH, presupuesto del piloto cerrado y arranque del co-diseño.</p>
+      </div>
+    </div>
+
+    <div class="card dark" style="margin-top:30px">
+      <div class="head"><div class="icon">✉</div><h3>Punto de contacto</h3></div>
+      <div class="grid-2" style="gap:14px;margin-top:6px">
+        <div>
+          <p style="color:#9FC8B3;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;margin-bottom:4px">Líder del programa</p>
+          <p style="color:#fff;font-size:15px;font-weight:700;margin:0">William Mojica</p>
+          <p style="color:#C7E0D2;font-size:13px;margin:2px 0 0">Líder Impacta Rural y Diverso · Universidad EAN</p>
+          <p style="color:#C7E0D2;font-size:13px;margin:2px 0 0;font-style:italic">wfmojica@universidadean.edu.co</p>
+        </div>
+        <div>
+          <p style="color:#9FC8B3;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;margin-bottom:4px">Acompañamiento académico</p>
+          <p style="color:#fff;font-size:15px;font-weight:700;margin:0">Jorge Hugo Pérez Gaona</p>
+          <p style="color:#C7E0D2;font-size:13px;margin:2px 0 0">Docente Facultad de Administración y Mercadeo · Universidad EAN</p>
+          <p style="color:#C7E0D2;font-size:13px;margin:2px 0 0;font-style:italic">Disponible para la fase de co-diseño y mentoría</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="card gold" style="margin-top:22px;text-align:center">
+      <h3 style="font-size:18px;margin-bottom:10px">El compromiso que dejamos sobre la mesa</h3>
+      <p style="color:var(--navy);font-size:15px;line-height:1.6;margin:0">
+        <strong>"Una asociación cacaotera mejor administrada entrega mejor cacao a CNCH.</strong><br>
+        La Universidad EAN convierte esa premisa en programa, en piloto medible y en escalamiento."
+      </p>
+    </div>
+  </section>
+
+</main>
+
+<div class="nav-arrows">
+  <button id="prevBtn" title="Atrás (←)">←</button>
+  <button id="nextBtn" title="Adelante (→)">→</button>
+</div>
+
+<footer>
+  <div class="seal">UNIVERSIDAD EAN  ·  IMPACTA RURAL Y DIVERSO</div>
+  <strong>Propuesta de acompañamiento a las asociaciones cacaoteras de la Compañía Nacional de Chocolates</strong><br>
+  Documento de trabajo para la sesión de validación  ·  Confidencial
+</footer>
+
+<script>
+  const pages = document.querySelectorAll(".page");
+  const tabs = document.querySelectorAll(".tab");
+  const prev = document.getElementById("prevBtn");
+  const next = document.getElementById("nextBtn");
+  let active = 0;
+  function show(idx){
+    active = Math.max(0, Math.min(pages.length-1, idx));
+    pages.forEach((p,i)=>p.classList.toggle("active", i===active));
+    tabs.forEach((t,i)=>t.classList.toggle("active", i===active));
+    prev.disabled = active===0;
+    next.disabled = active===pages.length-1;
+    window.scrollTo({top:0, behavior:"smooth"});
+  }
+  tabs.forEach((t,i)=>t.addEventListener("click", ()=>show(i)));
+  prev.addEventListener("click", ()=>show(active-1));
+  next.addEventListener("click", ()=>show(active+1));
+  document.addEventListener("keydown", e=>{
+    if (e.key==="ArrowRight") show(active+1);
+    if (e.key==="ArrowLeft") show(active-1);
+    if (e.key>="1" && e.key<="5") show(parseInt(e.key,10)-1);
+  });
+  document.getElementById("today").textContent = new Date().toLocaleDateString("es-CO",{weekday:"long",year:"numeric",month:"long",day:"numeric"});
+  show(0);
+</script>
+</body>
+</html>
